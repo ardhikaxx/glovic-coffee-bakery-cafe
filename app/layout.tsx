@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'GloVic — Coffee · Bakery · Cafe Jember',
     description: 'Tempat favorit Jember untuk ngopi dan menikmati bakery segar. Buka setiap hari 06.00–22.00 WIB.',
-    url: 'https://glovic.id', // domain final
+    url: 'https://glovic-cafe.vercel.app', // domain Vercel
     siteName: 'GloVic Cafe & Bakery',
     locale: 'id_ID',
     type: 'website',
