@@ -1,9 +1,32 @@
+'use client';
+
 import { GLOVIC_INFO } from '@/lib/constants/glovic';
 import Image from 'next/image';
 import OpenBadge from '@/components/ui/OpenBadge';
-import { MapPin, Phone, Coffee, Clock } from 'lucide-react';
+import { MapPin, Phone, Coffee } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function LinkTreePage() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { type: 'spring', stiffness: 300, damping: 24 } 
+    },
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-wine-950 via-wine-900 to-wine-950 flex flex-col items-center py-16 px-4 font-jakarta text-white relative overflow-hidden">
       {/* Decorative background elements */}
@@ -12,9 +35,14 @@ export default function LinkTreePage() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-wine-600 blur-[100px]"></div>
       </div>
 
-      <div className="w-full max-w-md z-10 flex flex-col items-center">
+      <motion.div 
+        className="w-full max-w-md z-10 flex flex-col items-center"
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
         {/* Profile Section */}
-        <div className="w-32 h-32 relative rounded-full border-4 border-wine-400 shadow-[0_0_30px_rgba(196,89,107,0.3)] mb-6 overflow-hidden bg-wine-900">
+        <motion.div variants={itemVariants} className="w-32 h-32 relative rounded-full border-4 border-wine-400 shadow-[0_0_30px_rgba(196,89,107,0.3)] mb-6 overflow-hidden bg-wine-900">
           <Image
             src="/logo.webp"
             alt="GloVic Logo"
@@ -22,27 +50,31 @@ export default function LinkTreePage() {
             className="object-cover"
             priority
           />
-        </div>
+        </motion.div>
         
-        <h1 className="font-playfair text-4xl font-bold tracking-wider mb-2 text-center text-white">
+        <motion.h1 variants={itemVariants} className="font-playfair text-4xl font-bold tracking-wider mb-2 text-center text-white">
           {GLOVIC_INFO.name}
-        </h1>
-        <p className="text-wine-300 tracking-[0.2em] uppercase text-sm font-semibold mb-6 text-center">
+        </motion.h1>
+        
+        <motion.p variants={itemVariants} className="text-wine-300 tracking-[0.2em] uppercase text-sm font-semibold mb-6 text-center">
           {GLOVIC_INFO.tagline}
-        </p>
+        </motion.p>
 
         {/* Status Badge */}
-        <div className="mb-10">
+        <motion.div variants={itemVariants} className="mb-10">
           <OpenBadge />
-        </div>
+        </motion.div>
 
         {/* Links Section */}
         <div className="w-full space-y-4">
-          <a
+          <motion.a
+            variants={itemVariants}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             href={GLOVIC_INFO.contact.whatsapp.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center p-4 bg-green-600/90 hover:bg-green-500 rounded-2xl transition-all duration-300 hover:scale-105 border border-green-500 shadow-lg shadow-green-900/50 group"
+            className="flex items-center p-4 bg-green-600/90 hover:bg-green-500 rounded-2xl transition-colors border border-green-500 shadow-lg shadow-green-900/50 group"
           >
             <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center shrink-0">
               <Phone className="w-6 h-6 text-white" />
@@ -51,13 +83,16 @@ export default function LinkTreePage() {
               <h2 className="font-bold text-lg">Pesan via WhatsApp</h2>
               <p className="text-sm text-green-100 font-mono">0811-3558693</p>
             </div>
-          </a>
+          </motion.a>
 
-          <a
+          <motion.a
+            variants={itemVariants}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             href={GLOVIC_INFO.contact.instagram.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center p-4 bg-wine-800/80 hover:bg-wine-700 rounded-2xl transition-all duration-300 hover:scale-[1.02] border border-wine-600 shadow-lg group"
+            className="flex items-center p-4 bg-wine-800/80 hover:bg-wine-700 rounded-2xl transition-colors border border-wine-600 shadow-lg group"
           >
             <div className="w-12 h-12 bg-wine-600 rounded-full flex items-center justify-center shrink-0 group-hover:bg-wine-500 transition-colors">
               <svg
@@ -73,21 +108,24 @@ export default function LinkTreePage() {
               <h2 className="font-bold text-lg">Follow Instagram</h2>
               <p className="text-sm text-wine-200">@glovicbakery</p>
             </div>
-          </a>
+          </motion.a>
 
-          <div className="pt-6 pb-2 flex items-center justify-center">
+          <motion.div variants={itemVariants} className="pt-6 pb-2 flex items-center justify-center">
             <div className="h-px bg-wine-800 flex-1"></div>
             <span className="px-4 text-wine-400 font-playfair italic text-lg">Lokasi Kami</span>
             <div className="h-px bg-wine-800 flex-1"></div>
-          </div>
+          </motion.div>
 
           {GLOVIC_INFO.branches.map((branch) => (
-            <a
+            <motion.a
               key={branch.id}
+              variants={itemVariants}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               href={branch.mapLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center p-4 bg-wine-900/80 hover:bg-wine-800 rounded-2xl transition-all duration-300 hover:scale-[1.02] border border-wine-700 shadow-lg group"
+              className="flex items-center p-4 bg-wine-900/80 hover:bg-wine-800 rounded-2xl transition-colors border border-wine-700 shadow-lg group"
             >
               <div className="w-12 h-12 bg-wine-700 rounded-full flex items-center justify-center shrink-0 group-hover:bg-wine-600 transition-colors">
                 <MapPin className="w-6 h-6 text-wine-100" />
@@ -96,12 +134,12 @@ export default function LinkTreePage() {
                 <h2 className="font-bold text-lg text-gold-400">{branch.name}</h2>
                 <p className="text-xs text-wine-300 line-clamp-1 mt-0.5">{branch.address}</p>
               </div>
-            </a>
+            </motion.a>
           ))}
         </div>
 
         {/* Footer */}
-        <div className="mt-16 text-center">
+        <motion.div variants={itemVariants} className="mt-16 text-center">
           <Coffee className="w-6 h-6 text-wine-600 mx-auto mb-4" />
           <p className="text-wine-400 text-sm font-medium">
             Setiap Hari • 06.00 – 22.00 WIB
@@ -109,8 +147,8 @@ export default function LinkTreePage() {
           <p className="text-wine-600 text-xs mt-4">
             &copy; {new Date().getFullYear()} GloVic Jember
           </p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
