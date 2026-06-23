@@ -1,12 +1,31 @@
 'use client';
 
+import { useState } from 'react';
 import { GLOVIC_INFO } from '@/lib/constants/glovic';
 import Image from 'next/image';
 import OpenBadge from '@/components/ui/OpenBadge';
 import { MapPin, Phone, Coffee } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
+import confetti from 'canvas-confetti';
 
 export default function LinkTreePage() {
+  const [clickCount, setClickCount] = useState(0);
+
+  const handleLogoClick = () => {
+    const newCount = clickCount + 1;
+    setClickCount(newCount);
+    
+    if (newCount === 5) {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#A83044', '#C9A84C', '#FFFDF9']
+      });
+      setClickCount(0);
+    }
+  };
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     show: {
@@ -42,7 +61,13 @@ export default function LinkTreePage() {
         animate="show"
       >
         {/* Profile Section */}
-        <motion.div variants={itemVariants} className="w-32 h-32 relative rounded-full border-4 border-wine-400 shadow-[0_0_30px_rgba(196,89,107,0.3)] mb-6 overflow-hidden bg-wine-900">
+        <motion.div 
+          variants={itemVariants} 
+          className="w-32 h-32 relative rounded-full border-4 border-wine-400 shadow-[0_0_30px_rgba(196,89,107,0.3)] mb-6 overflow-hidden bg-wine-900 cursor-pointer"
+          onClick={handleLogoClick}
+          whileTap={{ scale: 0.9 }}
+          title="Klik 5 kali untuk kejutan!"
+        >
           <Image
             src="/logo.webp"
             alt="GloVic Logo"
@@ -140,7 +165,12 @@ export default function LinkTreePage() {
 
         {/* Footer */}
         <motion.div variants={itemVariants} className="mt-16 text-center">
-          <Coffee className="w-6 h-6 text-wine-600 mx-auto mb-4" />
+          <div className="relative inline-block mx-auto mb-4">
+            {/* Smoke effects */}
+            <span className="absolute -top-4 left-1/2 w-2 h-4 bg-white/40 blur-sm rounded-full animate-smoke pointer-events-none"></span>
+            <span className="absolute -top-3 left-1/3 w-1.5 h-3 bg-white/30 blur-sm rounded-full animate-smoke-delayed pointer-events-none"></span>
+            <Coffee className="w-6 h-6 text-wine-600 relative z-10" />
+          </div>
           <p className="text-wine-400 text-sm font-medium">
             Setiap Hari • 06.00 – 22.00 WIB
           </p>

@@ -36,3 +36,18 @@ body {
   color: #1C1C1E;
   font-family: var(--font-jakarta);
 }
+
+@keyframes smoke {
+  0% { opacity: 0; transform: translateY(0) scale(1) translateX(0); }
+  20% { opacity: 0.6; transform: translateY(-5px) scale(1.1) translateX(-2px); }
+  100% { opacity: 0; transform: translateY(-20px) scale(2) translateX(5px); }
+}
+
+.animate-smoke {
+  animation: smoke 3s infinite ease-out;
+}
+
+.animate-smoke-delayed {
+  animation: smoke 3s infinite ease-out;
+  animation-delay: 1.5s;
+}
