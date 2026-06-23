@@ -165,12 +165,7 @@ export default function LinkTreePage() {
 
         {/* Footer */}
         <motion.div variants={itemVariants} className="mt-16 text-center">
-          <div className="relative inline-block mx-auto mb-4">
-            {/* Smoke effects */}
-            <span className="absolute -top-4 left-1/2 w-2 h-4 bg-white/40 blur-sm rounded-full animate-smoke pointer-events-none"></span>
-            <span className="absolute -top-3 left-1/3 w-1.5 h-3 bg-white/30 blur-sm rounded-full animate-smoke-delayed pointer-events-none"></span>
-            <Coffee className="w-6 h-6 text-wine-600 relative z-10" />
-          </div>
+          <Coffee className="w-6 h-6 text-wine-600 mx-auto mb-4" />
           <p className="text-wine-400 text-sm font-medium">
             Setiap Hari • 06.00 – 22.00 WIB
           </p>
