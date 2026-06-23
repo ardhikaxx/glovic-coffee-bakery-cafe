@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   robots: { index: true, follow: true },
-  icons: { icon: '/icons/glovic-favicon.ico' },
+  icons: { icon: '/logo.webp' },
 };
 
 export default function RootLayout({
