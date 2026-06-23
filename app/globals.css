@@ -1,26 +1,38 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-wine-50: #FFF0F2;
+  --color-wine-100: #FFD6DC;
+  --color-wine-200: #FFB3BC;
+  --color-wine-300: #D98A96;
+  --color-wine-400: #C4596B;
+  --color-wine-500: #A83044;
+  --color-wine-600: #922637;
+  --color-wine-700: #7A1F33;
+  --color-wine-800: #5C1A2A;
+  --color-wine-900: #2D1018;
+  --color-wine-950: #1A0A0F;
+
+  --color-cream-50: #FFFDF9;
+  --color-cream-100: #FAF5EE;
+
+  --color-gold-400: #C9A84C;
+  --color-gold-500: #B8960F;
+
+  --font-playfair: var(--font-playfair), Georgia, serif;
+  --font-jakarta: var(--font-jakarta), sans-serif;
+  --font-mono: var(--font-mono), monospace;
+
+  --background-image-wine-gradient: linear-gradient(135deg, #1A0A0F 0%, #5C1A2A 50%, #922637 100%);
+  --background-image-cream-gradient: linear-gradient(180deg, #FFFDF9 0%, #FAF5EE 100%);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-cream-50);
+  color: #1C1C1E;
+  font-family: var(--font-jakarta);
 }
