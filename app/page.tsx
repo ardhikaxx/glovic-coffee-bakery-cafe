@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { GLOVIC_INFO } from '@/lib/constants/glovic';
 import Image from 'next/image';
 import OpenBadge from '@/components/ui/OpenBadge';
-import { MapPin, Phone, Coffee } from 'lucide-react';
+import { MapPin, Phone, Coffee, Share2 } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
@@ -16,6 +16,24 @@ export default function LinkTreePage() {
       origin: { y: 0.6 },
       colors: ['#A83044', '#C9A84C', '#FFFDF9']
     });
+  };
+
+  const handleShare = async () => {
+    const shareData = {
+      title: 'GloVic — Coffee · Bakery · Cafe',
+      text: 'Tempat nongkrong favorit di Jember! Cek lokasi dan kontak GloVic di sini:',
+      url: 'https://glovic-cafe.vercel.app',
+    };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(shareData.url);
+        alert('Tautan disalin ke papan klip! Silakan bagikan ke teman Anda.');
+      }
+    } catch (err) {
+      console.log('Error sharing:', err);
+    }
   };
 
   const containerVariants: Variants = {
@@ -47,11 +65,24 @@ export default function LinkTreePage() {
       </div>
 
       <motion.div 
-        className="w-full max-w-md z-10 flex flex-col items-center"
+        className="w-full max-w-md z-10 flex flex-col items-center relative"
         variants={containerVariants}
         initial="hidden"
         animate="show"
       >
+        {/* Share Button */}
+        <motion.button
+          variants={itemVariants}
+          onClick={handleShare}
+          className="absolute top-0 right-2 sm:right-0 p-3 bg-wine-900/60 backdrop-blur-md rounded-full border border-wine-700/50 hover:bg-wine-800 transition-colors z-20 text-wine-300 hover:text-white shadow-[0_0_15px_rgba(0,0,0,0.2)]"
+          aria-label="Bagikan Profil"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          title="Bagikan ke teman"
+        >
+          <Share2 className="w-5 h-5" />
+        </motion.button>
+
         {/* Profile Section */}
         <motion.div 
           variants={itemVariants} 
