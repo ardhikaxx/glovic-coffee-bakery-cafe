@@ -77,9 +77,22 @@ export default function LinkTreePage() {
           {GLOVIC_INFO.tagline}
         </motion.p>
 
-        {/* Status Badge */}
-        <motion.div variants={itemVariants} className="mb-10">
+        {/* Status & Trust Badge */}
+        <motion.div variants={itemVariants} className="mb-10 flex flex-col items-center space-y-4">
           <OpenBadge />
+          
+          <div className="flex flex-col items-center bg-wine-900/40 border border-wine-800/60 px-5 py-3 rounded-2xl backdrop-blur-sm shadow-inner cursor-pointer hover:bg-wine-800/60 transition-colors" title="Lihat Ulasan di Google Maps">
+            <div className="flex space-x-1 mb-1.5">
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} className="w-4 h-4 text-gold-400 fill-gold-400" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} stroke="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              ))}
+            </div>
+            <span className="text-xs font-jakarta text-wine-300 font-medium tracking-wide text-center">
+              <span className="font-bold text-white">4.8/5</span> dari Ratusan Ulasan Google
+            </span>
+          </div>
         </motion.div>
 
         {/* Links Section */}
