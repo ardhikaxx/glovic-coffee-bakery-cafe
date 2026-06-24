@@ -142,14 +142,14 @@ export default function LinkTreePage() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setIsReservationOpen(!isReservationOpen)}
-              className="w-full flex items-center p-4 bg-gold-600/90 hover:bg-gold-500 rounded-2xl transition-colors border border-gold-500 shadow-lg shadow-gold-900/50 group"
+              className="w-full flex items-center p-4 bg-wine-800/80 hover:bg-wine-700 rounded-2xl transition-colors border border-wine-600 shadow-lg group"
             >
-              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 bg-wine-600 rounded-full flex items-center justify-center shrink-0 group-hover:bg-wine-500 transition-colors">
                 <ClipboardList className="w-6 h-6 text-white" />
               </div>
               <div className="ml-4 flex-1 text-left">
                 <h2 className="font-bold text-lg text-white">Reservasi Tempat</h2>
-                <p className="text-sm text-gold-100 font-medium tracking-wide">Pesan meja tanpa antre</p>
+                <p className="text-sm text-wine-200 font-medium tracking-wide">Pesan meja tanpa antre</p>
               </div>
             </motion.button>
 
