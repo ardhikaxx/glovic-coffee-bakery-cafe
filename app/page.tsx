@@ -248,7 +248,7 @@ export default function LinkTreePage() {
 
         {/* Peta Lokasi Langsung */}
         <motion.div variants={itemVariants} className="w-full mt-8 rounded-2xl overflow-hidden border-2 border-wine-800/60 shadow-lg shadow-black/20 bg-wine-900/50 p-1">
-          <p className="text-center text-xs text-wine-300 mb-2 mt-1 font-medium tracking-widest uppercase">📍 Petunjuk Arah (Google Maps)</p>
+          <p className="text-center text-xs text-wine-300 mb-2 mt-1 font-medium tracking-widest uppercase">Petunjuk Arah (Google Maps)</p>
           <div className="rounded-xl overflow-hidden">
             <iframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15797.257679198088!2d113.7030466!3d-8.1710447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6943abd3adb07%3A0x35e4b99c811c9bcb!2sGloVic%20coffee%20-%20bakery%20-%20cafe!5e0!3m2!1sid!2sid!4v1782257649559!5m2!1sid!2sid" 
