@@ -9,21 +9,13 @@ import { motion, Variants } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
 export default function LinkTreePage() {
-  const [clickCount, setClickCount] = useState(0);
-
   const handleLogoClick = () => {
-    const newCount = clickCount + 1;
-    setClickCount(newCount);
-    
-    if (newCount === 5) {
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#A83044', '#C9A84C', '#FFFDF9']
-      });
-      setClickCount(0);
-    }
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#A83044', '#C9A84C', '#FFFDF9']
+    });
   };
 
   const containerVariants: Variants = {
@@ -66,7 +58,7 @@ export default function LinkTreePage() {
           className="w-32 h-32 relative rounded-full border-4 border-wine-400 shadow-[0_0_30px_rgba(196,89,107,0.3)] mb-6 overflow-hidden bg-wine-900 cursor-pointer"
           onClick={handleLogoClick}
           whileTap={{ scale: 0.9 }}
-          title="Klik 5 kali untuk kejutan!"
+          title="Klik untuk kejutan!"
         >
           <Image
             src="/logo.webp"
