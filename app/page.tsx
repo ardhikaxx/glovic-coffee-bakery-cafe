@@ -4,11 +4,13 @@ import { useState } from 'react';
 import { GLOVIC_INFO } from '@/lib/constants/glovic';
 import Image from 'next/image';
 import OpenBadge from '@/components/ui/OpenBadge';
-import { MapPin, Phone, Coffee, Share2 } from 'lucide-react';
-import { motion, Variants } from 'framer-motion';
+import { MapPin, Phone, Coffee, Share2, ClipboardList } from 'lucide-react';
+import { motion, Variants, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
 export default function LinkTreePage() {
+  const [isReservationOpen, setIsReservationOpen] = useState(false);
+  const [reservationData, setReservationData] = useState({ name: '', date: '', time: '', pax: '2' });
   const handleLogoClick = () => {
     confetti({
       particleCount: 100,
@@ -34,6 +36,12 @@ export default function LinkTreePage() {
     } catch (err) {
       console.log('Error sharing:', err);
     }
+  };
+
+  const handleReservationSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = `Halo GloVic, saya ingin melakukan reservasi meja:%0A%0ANama: ${reservationData.name}%0ATanggal: ${reservationData.date}%0AJam: ${reservationData.time}%0AJumlah Orang: ${reservationData.pax} Pax%0A%0AMohon konfirmasinya. Terima kasih!`;
+    window.open(`https://wa.me/628113558693?text=${text}`, '_blank');
   };
 
   const containerVariants: Variants = {
@@ -128,6 +136,45 @@ export default function LinkTreePage() {
 
         {/* Links Section */}
         <div className="w-full space-y-4">
+          {/* Reservasi Button */}
+          <motion.div variants={itemVariants} className="w-full">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setIsReservationOpen(!isReservationOpen)}
+              className="w-full flex items-center p-4 bg-gold-600/90 hover:bg-gold-500 rounded-2xl transition-colors border border-gold-500 shadow-lg shadow-gold-900/50 group"
+            >
+              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center shrink-0">
+                <ClipboardList className="w-6 h-6 text-white" />
+              </div>
+              <div className="ml-4 flex-1 text-left">
+                <h2 className="font-bold text-lg text-white">Reservasi Tempat</h2>
+                <p className="text-sm text-gold-100 font-medium tracking-wide">Pesan meja tanpa antre</p>
+              </div>
+            </motion.button>
+
+            <AnimatePresence>
+              {isReservationOpen && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                  animate={{ opacity: 1, height: 'auto', marginTop: 12 }}
+                  exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                  className="overflow-hidden"
+                >
+                  <form onSubmit={handleReservationSubmit} className="bg-wine-900/80 p-5 rounded-2xl border border-wine-700 shadow-inner flex flex-col space-y-3">
+                    <input required type="text" placeholder="Nama Lengkap" className="w-full p-3 rounded-xl bg-wine-950/50 border border-wine-700 text-white placeholder-wine-400 focus:outline-none focus:border-gold-500" value={reservationData.name} onChange={(e) => setReservationData({...reservationData, name: e.target.value})} />
+                    <div className="flex space-x-3">
+                      <input required type="date" className="w-1/2 p-3 rounded-xl bg-wine-950/50 border border-wine-700 text-white placeholder-wine-400 focus:outline-none focus:border-gold-500 [color-scheme:dark]" value={reservationData.date} onChange={(e) => setReservationData({...reservationData, date: e.target.value})} />
+                      <input required type="time" className="w-1/2 p-3 rounded-xl bg-wine-950/50 border border-wine-700 text-white placeholder-wine-400 focus:outline-none focus:border-gold-500 [color-scheme:dark]" value={reservationData.time} onChange={(e) => setReservationData({...reservationData, time: e.target.value})} />
+                    </div>
+                    <input required type="number" min="1" placeholder="Jumlah Orang (Pax)" className="w-full p-3 rounded-xl bg-wine-950/50 border border-wine-700 text-white placeholder-wine-400 focus:outline-none focus:border-gold-500" value={reservationData.pax} onChange={(e) => setReservationData({...reservationData, pax: e.target.value})} />
+                    <button type="submit" className="w-full mt-2 bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-xl transition-colors shadow-lg">Kirim via WhatsApp</button>
+                  </form>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+
           <motion.a
             variants={itemVariants}
             whileHover={{ scale: 1.05 }}
